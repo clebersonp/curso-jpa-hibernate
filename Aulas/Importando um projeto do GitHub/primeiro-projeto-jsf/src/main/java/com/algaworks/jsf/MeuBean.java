@@ -7,6 +7,8 @@ import javax.faces.bean.ManagedBean;
 @ManagedBean
 public class MeuBean implements Serializable {
 
+	private static final long serialVersionUID = 1L;
+	
 	private String nome;
 
 	public void transformar() {
