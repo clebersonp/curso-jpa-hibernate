@@ -8,5 +8,5 @@
 	<Resource name="jdbc/locadoraDB" auth="Container"
 		factory="org.apache.naming.factory.BeanFactory" type="com.mchange.v2.c3p0.ComboPooledDataSource"
 		driverClass="com.mysql.jdbc.Driver" jdbcUrl="jdbc:mysql://localhost:3306/locadora"
-		user="root" password="root" minPoolSize="2" maxPoolSize="2" />
+		user="root" password="root" minPoolSize="3" maxPoolSize="3" />
 </Context>
