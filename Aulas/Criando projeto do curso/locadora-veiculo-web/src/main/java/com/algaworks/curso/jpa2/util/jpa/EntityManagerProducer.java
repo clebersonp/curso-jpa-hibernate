@@ -26,5 +26,5 @@ public class EntityManagerProducer {
 	public void close(@Disposes EntityManager manager) {
 		manager.close();
 	}
-	
+
 }

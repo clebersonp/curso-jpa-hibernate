@@ -9,7 +9,7 @@ import javax.naming.InitialContext;
 import javax.naming.NamingException;
 
 public class CDIServiceLocator {
-	
+
 	private static BeanManager getBeanManager() {
 		try {
 			InitialContext initialContext = new InitialContext();

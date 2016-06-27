@@ -11,16 +11,13 @@ import javax.faces.bean.ViewScoped;
  *
  * @author Steve Taylor
  */
-public class ViewContextExtension implements Extension
-{
-	public void addScope(@Observes final BeforeBeanDiscovery event)
-	{
+public class ViewContextExtension implements Extension {
+	public void addScope(@Observes final BeforeBeanDiscovery event) {
 		event.addScope(ViewScoped.class, true, true);
 	}
 
-	public void registerContext(@Observes final AfterBeanDiscovery event)
-	{
+	public void registerContext(@Observes final AfterBeanDiscovery event) {
 		event.addContext(new ViewScopedContext());
 	}
-	
+
 }

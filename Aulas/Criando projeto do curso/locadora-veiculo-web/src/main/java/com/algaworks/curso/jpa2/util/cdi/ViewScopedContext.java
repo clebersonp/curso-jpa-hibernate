@@ -21,7 +21,7 @@ import javax.faces.event.SystemEventListener;
  * @author Steve Taylor
  */
 public class ViewScopedContext implements Context, SystemEventListener {
-	
+
 	@SuppressWarnings("unchecked")
 	@Override
 	public <T> T get(final Contextual<T> component) {
