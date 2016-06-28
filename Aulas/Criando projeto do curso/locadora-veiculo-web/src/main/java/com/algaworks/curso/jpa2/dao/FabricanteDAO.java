@@ -19,7 +19,7 @@ public class FabricanteDAO implements Serializable {
 	
 	@Transactional
 	public void salvar(Fabricante fabricante) {
-		em.persist(fabricante);
+		em.merge(fabricante);
 	}
 
 	public List<Fabricante> buscarTodos() {
@@ -34,6 +34,10 @@ public class FabricanteDAO implements Serializable {
 		fabricante = this.em.find(Fabricante.class, fabricante.getCodigo());
 		this.em.remove(fabricante);
 		this.em.flush();
+	}
+
+	public Fabricante buscarPeloCodigo(Long codigo) {
+		return this.em.find(Fabricante.class, codigo);
 	}
 	
 }
