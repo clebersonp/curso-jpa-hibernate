@@ -27,6 +27,18 @@ public class Fabricante {
 		this.nome = nome;
 	}
 	
+	
+	/* Preciso implementar o equals e hasCode por
+	 * causa do converter de fabricante.
+	 * No comboBox de fabricante no cadastro do modelo do carro,
+	 * o converter vai converter o valor do fabricante no html
+	 * para um objeto fabricante pelo codigo, e o jsf vai comparar
+	 * se o objeto que retornou da consulta é igual ao da pagina html,
+	 * como o jsf sabe que são iguais?
+	 * pelo código, pois no equals e hasCode eu falo qual atributo
+	 * que quero comparar entre dois objetos
+	 */
+	
 	@Override
 	public int hashCode() {
 		final int prime = 31;

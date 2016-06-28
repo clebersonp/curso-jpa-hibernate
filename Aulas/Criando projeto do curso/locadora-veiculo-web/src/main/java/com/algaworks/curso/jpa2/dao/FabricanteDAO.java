@@ -15,15 +15,15 @@ public class FabricanteDAO implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Inject
-	private EntityManager em;
+	private EntityManager entityManager;
 	
 	@Transactional
 	public void salvar(Fabricante fabricante) {
-		em.merge(fabricante);
+		this.entityManager.merge(fabricante);
 	}
 
 	public List<Fabricante> buscarTodos() {
-		return this.em.createQuery("from Fabricante", Fabricante.class)
+		return this.entityManager.createQuery("from Fabricante", Fabricante.class)
 				.getResultList();
 	}
 
@@ -31,13 +31,13 @@ public class FabricanteDAO implements Serializable {
 	public void excluir(Fabricante fabricante) throws NegocioException {
 		//pesquisando o fabricante antes de excluir
 		//para atachalo no entity manager
-		fabricante = this.em.find(Fabricante.class, fabricante.getCodigo());
-		this.em.remove(fabricante);
-		this.em.flush();
+		fabricante = this.entityManager.find(Fabricante.class, fabricante.getCodigo());
+		this.entityManager.remove(fabricante);
+		this.entityManager.flush();
 	}
 
 	public Fabricante buscarPeloCodigo(Long codigo) {
-		return this.em.find(Fabricante.class, codigo);
+		return this.entityManager.find(Fabricante.class, codigo);
 	}
 	
 }
