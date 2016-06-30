@@ -10,7 +10,6 @@ import javax.inject.Named;
 
 import com.algaworks.curso.jpa2.dao.FabricanteDAO;
 import com.algaworks.curso.jpa2.modelo.Fabricante;
-import com.algaworks.curso.jpa2.service.NegocioException;
 import com.algaworks.curso.jpa2.util.jsf.FacesUtil;
 
 @Named
@@ -36,7 +35,7 @@ public class PesquisaFabricanteBean implements Serializable {
 			FacesUtil.addSuccessMessage("Fabricante " 
 					+ this.fabricanteSelecionado.getNome() 
 					+ " excluído com sucesso!");
-		} catch (NegocioException e) {
+		} catch (Exception e) {
 			FacesUtil.addErrorMessage("O fabricante "
 					+ this.fabricanteSelecionado.getNome()
 					+ " não foi excluído!");
