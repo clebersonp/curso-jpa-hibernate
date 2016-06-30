@@ -9,6 +9,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 
@@ -20,7 +21,7 @@ public class Carro {
 	private String chassi;
 	private String cor;
 	private BigDecimal valorDiaria;
-	private ModeloCarro modeloCarro;
+	private ModeloCarro modelo;
 	private List<Acessorio> acessorios;
 	
 	@Id
@@ -63,14 +64,16 @@ public class Carro {
 	
 	@ManyToOne
 	@JoinColumn(name = "codigo_modelo")
-	public ModeloCarro getModeloCarro() {
-		return modeloCarro;
+	public ModeloCarro getModelo() {
+		return modelo;
 	}
-	public void setModeloCarro(ModeloCarro modeloCarro) {
-		this.modeloCarro = modeloCarro;
+	public void setModelo(ModeloCarro modelo) {
+		this.modelo = modelo;
 	}
 	
 	@ManyToMany
+	@JoinTable(name = "carro_acessorio", joinColumns = @JoinColumn(name = "codigo_carro"),
+			inverseJoinColumns = @JoinColumn(name = "codigo_acessorio"))
 	public List<Acessorio> getAcessorios() {
 		return acessorios;
 	}
