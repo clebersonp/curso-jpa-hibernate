@@ -7,6 +7,7 @@ import javax.inject.Inject;
 import javax.persistence.EntityManager;
 
 import com.algaworks.curso.jpa2.modelo.ModeloCarro;
+import com.algaworks.curso.jpa2.service.NegocioException;
 import com.algaworks.curso.jpa2.util.jpa.Transactional;
 
 public class ModeloCarroDAO implements PersistDAO<ModeloCarro>,Serializable {
@@ -30,7 +31,7 @@ public class ModeloCarroDAO implements PersistDAO<ModeloCarro>,Serializable {
 
 	@Transactional
 	@Override
-	public void excluir(ModeloCarro modeloCarro) {
+	public void excluir(ModeloCarro modeloCarro) throws NegocioException {
 		modeloCarro = this.buscarPeloCodigo(modeloCarro.getCodigo());
 		this.entityManager.remove(modeloCarro);
 		this.entityManager.flush();
