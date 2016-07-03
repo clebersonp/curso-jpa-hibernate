@@ -46,6 +46,11 @@ public class Aluguel {
 		this.carro = carro;
 	}
 
+	/*
+	 * Retirando o cascade all, eu preciso primeiro salvar a apolice
+	 * para dps salvar o alguel no banco, dessa maneira seria melhor persistir
+	 * a apolice na camada dao.
+	 * */
 	@OneToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "codigo_apolice_seguro")
 	public ApoliceSeguro getApoliceSeguro() {
