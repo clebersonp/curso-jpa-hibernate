@@ -5,8 +5,10 @@ import java.util.List;
 
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
+import javax.persistence.PersistenceException;
 
 import com.algaworks.curso.jpa2.modelo.Carro;
+import com.algaworks.curso.jpa2.service.NegocioException;
 import com.algaworks.curso.jpa2.util.jpa.Transactional;
 
 public class CarroDAO implements PersistDAO<Carro>, Serializable {
@@ -25,10 +27,14 @@ public class CarroDAO implements PersistDAO<Carro>, Serializable {
 
 	@Transactional
 	@Override
-	public void excluir(Carro carro) {
-		Carro outro = this.buscarPeloCodigo(carro.getCodigo());
-		this.manager.remove(outro);
-		this.manager.flush();
+	public void excluir(Carro carro) throws NegocioException {
+		carro = this.buscarPeloCodigo(carro.getCodigo());
+		try {
+			this.manager.remove(carro);
+			this.manager.flush();
+		} catch (PersistenceException e) {
+			throw new NegocioException("Carro não pode ser excluído!");
+		}
 	}
 
 	@Override

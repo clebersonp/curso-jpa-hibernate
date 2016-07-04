@@ -22,7 +22,7 @@ public class ModeloCarroConverter implements Converter {
 	public Object getAsObject(FacesContext context, UIComponent component, String value) {
 		ModeloCarro result = null;
 		
-		if (value != null && !("".equals(value))) {
+		if (value != null) {
 			result = this.modeloCarroDAO.buscarPeloCodigo(new Long(value));
 		}
 		return result;

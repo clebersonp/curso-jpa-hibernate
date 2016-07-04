@@ -74,8 +74,9 @@ public class Carro {
 	}
 	
 	@ManyToMany
-	@JoinTable(name = "carro_acessorio", joinColumns = @JoinColumn(name = "codigo_carro"),
-			inverseJoinColumns = @JoinColumn(name = "codigo_acessorio"))
+	@JoinTable(name = "carro_acessorio"
+			, joinColumns = @JoinColumn(name = "codigo_carro")
+			, inverseJoinColumns = @JoinColumn(name = "codigo_acessorio"))
 	public List<Acessorio> getAcessorios() {
 		return acessorios;
 	}

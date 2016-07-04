@@ -34,7 +34,7 @@ public class CarroConverter implements Converter {
 		
 		if (value != null) {
 			Long codigo = ((Carro)value).getCodigo();
-			return codigo != null ? codigo.toString() : "";
+			return codigo != null ? codigo.toString() : null;
 		}
 		
 		return "";
