@@ -44,6 +44,10 @@ public class PesquisaCarroBean implements Serializable {
 		}
 	}
 	
+	public void buscarCarroComAcessorios() {
+		this.carroSelecionado = this.carroDAO.buscarCarroComAcessorios(this.carroSelecionado.getCodigo());
+	}
+	
 	public List<Carro> getCarros() {
 		return carros;
 	}

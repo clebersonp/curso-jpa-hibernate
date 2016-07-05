@@ -47,6 +47,12 @@ public class CarroDAO implements PersistDAO<Carro>, Serializable {
 	public Carro buscarPeloCodigo(Long codigo) {
 		return this.manager.find(Carro.class, codigo);
 	}
+
+	public Carro buscarCarroComAcessorios(Long codigo) {
+		return this.manager.createQuery("select c from Carro c JOIN c.acessorios a where c.codigo = ?", Carro.class)
+				.setParameter(1, codigo)
+				.getSingleResult();
+	}
 	
 	
 }
