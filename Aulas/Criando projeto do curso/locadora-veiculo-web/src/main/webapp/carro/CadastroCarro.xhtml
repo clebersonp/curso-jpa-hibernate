@@ -34,12 +34,14 @@
 			    <p:outputLabel value="Modelo Carro" for="modeloCarro"/>
 	    		<p:selectOneMenu id="modeloCarro" value="#{cadastroCarroBean.carro.modelo}">
 	    			<f:selectItem itemLabel="Selecione o modelo" />
-	    			<f:selectItems value="#{cadastroCarroBean.modelosCarros}" var="modelosCarros" 
-						itemLabel="#{modelosCarros.descricao}" itemValue="#{modelosCarros}"/>
+	    			<f:selectItems value="#{cadastroCarroBean.modelosCarros}" var="modeloCarro" 
+						itemLabel="#{modeloCarro.descricao}" itemValue="#{modeloCarro}"/>
 	    		</p:selectOneMenu>
 			    
 			    <p:outputLabel value="Placa" for="placa"/>
-			    <p:inputText id="placa" size="20" maxlength="20" value="#{cadastroCarroBean.carro.placa}"/>
+			    <p:inputMask id="placa" size="20" maxlength="20" value="#{cadastroCarroBean.carro.placa}" mask="aaa-9999">
+			    	<p:ajax event="blur" listener="#{cadastroCarroBean.formatarPlaca}" update="frmCadastro:placa"/>
+			    </p:inputMask>
 			    
 			    <p:outputLabel value="Chassi" for="chassi"/>
 			    <p:inputText id="chassi" size="20" maxlength="20" value="#{cadastroCarroBean.carro.chassi}"/>
@@ -52,8 +54,10 @@
 			    
 			    <p:outputLabel value="Acessórios" for="acessorios"/>
 				<p:selectManyCheckbox id="acessorios" styleClass="many-checkbox" 
-						value="#{cadastroCarroBean.carro.acessorios}" converter="acessorioConverter">
-					<f:selectItems value="#{cadastroCarroBean.acessorios}" var="acessorio" 
+						value="#{cadastroCarroBean.carro.acessorios}" >
+					<f:attribute name="collectionType" value="java.util.ArrayList" />
+					<f:converter converterId="acessorioConverter" for="items" />
+					<f:selectItems id="items" value="#{cadastroCarroBean.acessorios}" var="acessorio" 
 						itemLabel="#{acessorio.descricao}" itemValue="#{acessorio}" />
 				</p:selectManyCheckbox>			    
 			</p:panelGrid>

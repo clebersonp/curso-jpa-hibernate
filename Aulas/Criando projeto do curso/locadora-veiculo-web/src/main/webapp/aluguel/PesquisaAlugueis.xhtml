@@ -1,0 +1,90 @@
+<ui:composition template="/WEB-INF/template/LayoutPadrao.xhtml"
+    xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:p="http://primefaces.org/ui">
+
+    <ui:define name="titulo">Pesquisa de Aluguel</ui:define>
+    
+    <ui:define name="corpo">
+    	<h1>Pesquisa de alugueis</h1>
+    	
+    	<h:form id="frmPesquisa">
+    		<p:messages id="messages" autoUpdate="true" closable="true" />
+    		
+    		<p:toolbar style="margin-top: 20px">
+    			<p:toolbarGroup>
+    				<p:commandButton value="Novo" id="botaoNovo" action="/aluguel/NovoAluguel?faces-redirect=true"/>
+    			</p:toolbarGroup>
+    		</p:toolbar>
+    	
+	    	<p:dataTable id="alugueisTable" value="#{pesquisaAluguelBean.alugueis}" var="aluguel"
+		    		style="margin-top: 20px" emptyMessage="Nenhum aluguel encontrado." rows="20"
+		    		paginator="true" paginatorAlwaysVisible="false" paginatorPosition="bottom">
+		    		<p:column headerText="Código" style="text-align: center; width: 100px">
+		    			<h:outputText value="#{aluguel.codigo}" />
+		    		</p:column>
+		    		<p:column headerText="Motorista">
+		    			<h:outputText value="#{aluguel.motorista.nome}" />
+		    		</p:column>
+		    		<p:column headerText="Carro">
+		    			<h:outputText value="#{aluguel.carro.modelo.descricao} - #{aluguel.carro.placa}" />
+		    		</p:column>
+		    		<p:column headerText="Data Pedido">
+	    				<h:outputText value="#{aluguel.dataPedido.time}" >
+			    			<f:convertDateTime pattern="dd/MM/yyyy" />
+	    				</h:outputText>
+		    		</p:column>
+		    		<p:column headerText="Data Entrega">
+		    			<h:outputText value="#{aluguel.dataEntrega}" >
+			    			<f:convertDateTime pattern="dd/MM/yyyy HH:mm" />
+		    			</h:outputText> 
+		    		</p:column>
+		    		<p:column headerText="Data Devolução">
+		    			<h:outputText value="#{aluguel.dataDevolucao}" >
+			    			<f:convertDateTime pattern="dd/MM/yyyy HH:mm" />
+			    		</h:outputText>
+		    		</p:column>
+		    		<p:column headerText="Valor Total">
+		    			<h:outputText value=" #{aluguel.valorTotal + aluguel.apoliceSeguro.valorFranquia}" />
+		    		</p:column>
+		    		<p:column headerText="Proteções" style="width: 100px; text-align: center">
+		    			<p:commandButton icon="ui-icon-extlink" title="Proteções" process="@this"
+		    				oncomplete="mostraProtecoes.show()" update=":frmPesquisa:mostraProtecoesDialog">
+		    				<f:setPropertyActionListener value="#{aluguel}" target="#{pesquisaAluguelBean.aluguelSelecionado}" />
+		    			</p:commandButton>
+		    		</p:column>
+		    		<p:column style="width: 100px; text-align: center">
+		    			<p:button outcome="NovoAluguel?faces-redirect=true" icon="ui-icon-pencil" title="Editar">
+		    				<f:param name="aluguel" value="#{aluguel.codigo}"/>
+		    			</p:button>
+		    			<p:commandButton icon="ui-icon-trash" title="Excluir" oncomplete="confirmacaoExclusao.show()"
+								process="@this" update=":frmPesquisa:confirmacaoExclusaoDialog">
+							<f:setPropertyActionListener target="#{pesquisaAluguelBean.aluguelSelecionado}" value="#{aluguel}" />
+						</p:commandButton>
+		    		</p:column>
+		    </p:dataTable>
+		   
+		    <p:confirmDialog id="confirmacaoExclusaoDialog" widgetVar="confirmacaoExclusao"
+	        		message="Tem certeza que deseja excluir o carro de placa #{pesquisaCarroBean.carroSelecionado.placa}?"  
+	                header="Exclusão de carro" severity="alert">
+	        	<p:button value="Não" onclick="confirmacaoExclusao.hide(); return false;" />
+	        	<p:commandButton value="Sim" update=":frmPesquisa:alugueisTable"
+	        			onclick="confirmacaoExclusao.hide()" action="#{pesquisaAluguelBean.excluir}" />
+	    	</p:confirmDialog>
+	    	
+	    	<p:dialog id="mostraProtecoesDialog" header="Acessórios" widgetVar="mostraProtecoes" modal="true">
+    			<h:outputText 
+    				value="Proteção Terceiro - #{pesquisaAluguelBean.aluguelSelecionado.apoliceSeguro.protecaoTerceiro ? 'Sim' : 'Não'}" />
+    			<br />
+    			<h:outputText 
+    				value="Proteção Causas Naturais - #{pesquisaAluguelBean.aluguelSelecionado.apoliceSeguro.protecaoCausasNaturais ? 'Sim' : 'Não'}" />
+    			<br />
+    			<h:outputText 
+    				value="Proteção Roubo - #{pesquisaAluguelBean.aluguelSelecionado.apoliceSeguro.protecaoRoubo ? 'Sim' : 'Não'}" />
+			</p:dialog>
+	    	
+	    </h:form>
+    </ui:define>
+</ui:composition>

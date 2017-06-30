@@ -19,8 +19,9 @@
     			</p:toolbarGroup>
     		</p:toolbar>
     	
-	    	<p:dataTable id="acessoriosTable" value="#{pesquisaAcessorioBean.acessorios}" var="acessorio"
-		    		style="margin-top: 20px" emptyMessage="Nenhum acessorio encontrado." rows="20"
+	    	<p:dataTable id="acessoriosTable" value="#{pesquisaAcessorioBean.lazyAcessorios}" var="acessorio"
+		    		style="margin-top: 20px" emptyMessage="Nenhum acessorio encontrado." rows="5"
+		    		lazy="true" rowsPerPageTemplate="5,15,25,50,100"
 		    		paginator="true" paginatorAlwaysVisible="false" paginatorPosition="bottom">
 		    		<p:column headerText="Código" style="text-align: center; width: 100px">
 		    			<h:outputText value="#{acessorio.codigo}" />

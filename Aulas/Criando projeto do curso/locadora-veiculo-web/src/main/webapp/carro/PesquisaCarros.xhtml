@@ -19,19 +19,28 @@
     			</p:toolbarGroup>
     		</p:toolbar>
     	
-	    	<p:dataTable id="carrosTable" value="#{pesquisaCarroBean.carros}" var="carro"
-		    		style="margin-top: 20px" emptyMessage="Nenhum carro encontrado." rows="20"
+	    	<p:dataTable id="carrosTable" value="#{pesquisaCarroBean.lazyCarros}" var="carro"
+		    		style="margin-top: 20px" emptyMessage="Nenhum carro encontrado." rows="5"
+		    		rowsPerPageTemplate="5,15,25,50,100" lazy="true"
 		    		paginator="true" paginatorAlwaysVisible="false" paginatorPosition="bottom">
-		    		<p:column headerText="Código" style="text-align: center; width: 100px">
+		    		
+		    		<p:column headerText="Código"
+		    			style="text-align: center; width: 100px">
 		    			<h:outputText value="#{carro.codigo}" />
 		    		</p:column>
-		    		<p:column headerText="Placa">
+		    		<p:column headerText="Modelo">
+		    			<h:outputText value="#{carro.modelo.descricao}" />
+		    		</p:column>
+		    		<p:column headerText="Fabricante" >
+		    			<h:outputText value="#{carro.modelo.fabricante.nome}" />
+		    		</p:column>
+		    		<p:column headerText="Placa" >
 		    			<h:outputText value="#{carro.placa}" />
 		    		</p:column>
-		    		<p:column headerText="Cor">
+		    		<p:column headerText="Cor" >
 		    			<h:outputText value="#{carro.cor}" />
 		    		</p:column>
-		    		<p:column headerText="Valor diária">
+		    		<p:column headerText="Valor diária" >
 		    			<h:outputText value="#{carro.valorDiaria}" />
 		    		</p:column>
 		    		<p:column headerText="Acessórios" style="width: 100px; text-align: center">
@@ -60,7 +69,8 @@
 	        			onclick="confirmacaoExclusao.hide()" action="#{pesquisaCarroBean.excluir}" />
 	    	</p:confirmDialog>
 	    	
-	    	<p:dialog id="mostraAcessoriosDialog" header="Acessórios" widgetVar="mostraAcessorios" modal="true">
+	    	<p:dialog id="mostraAcessoriosDialog" header="Acessórios" widgetVar="mostraAcessorios" modal="true"
+	    		closable="true" closeOnEscape="true" width="200">
     			<p:dataList value="#{pesquisaCarroBean.carroSelecionado.acessorios}" var="acessorio" itemType="disc"
     					rendered="#{not empty pesquisaCarroBean.carroSelecionado.acessorios}">
     				#{acessorio.descricao}

@@ -21,9 +21,11 @@
 			</p:toolbar>
 
 			<p:dataTable id="fabricantesTable"
-				value="#{pesquisaFabricanteBean.fabricantes}" var="fabricante"
-				style="margin-top: 20px"
-				emptyMessage="Nenhum fabricante encontrado." rows="20"
+				value="#{pesquisaFabricanteBean.lazyFabricantes}" var="fabricante"
+				style="margin-top: 20px" 
+				emptyMessage="Nenhum fabricante encontrado." rows="5"
+				lazy="true"
+				rowsPerPageTemplate="5,15,25,50,100"
 				paginator="true" paginatorAlwaysVisible="false"
 				paginatorPosition="bottom">
 				<p:column headerText="Código"

@@ -9,6 +9,9 @@
     <ui:define name="titulo">Novo aluguel</ui:define>
     
     <ui:define name="corpo">
+    	<f:metadata>
+    		<o:viewParam name="aluguel" value="#{novoAluguelBean.aluguel}" />
+    	</f:metadata>
     	<h1>Novo Aluguel</h1>
     	
     	<h:form id="frmCadastro">
@@ -18,16 +21,33 @@
 	    		<p:toolbarGroup>
 	    			<p:commandButton value="Salvar" id="botaoSalvar" action="#{novoAluguelBean.salvar}" update="frmCadastro"/>
 	    		</p:toolbarGroup>
+	    		<p:toolbarGroup align="right">
+					<p:button value="Pesquisa" outcome="/aluguel/PesquisaAlugueis?faces-redirect=true" />
+				</p:toolbarGroup>
 	    	</p:toolbar>
 	    	
 	    	<p:panelGrid columns="2" id="painel" style="width: 100%; margin-top: 20px"
 	    			columnClasses="rotulo, campo">
+	    		
+	    		<p:outputLabel value="Motorista" for="motorista"/>
+	    		<p:selectOneMenu id="motorista" value="#{novoAluguelBean.aluguel.motorista}">
+	    			<f:selectItem itemLabel="Selecione o motorista" />
+	    			<f:selectItems value="#{novoAluguelBean.motoristas}" var="motorista" 
+						itemLabel="#{motorista.nome}" itemValue="#{motorista}"/>
+	    		</p:selectOneMenu>
+	    		
 	    		<p:outputLabel value="Carro" for="carro"/>
 	    		<p:selectOneMenu id="carro" value="#{novoAluguelBean.aluguel.carro}">
 	    			<f:selectItem itemLabel="Selecione o carro" />
 	    			<f:selectItems value="#{novoAluguelBean.carros}" var="carro" 
 						itemLabel="#{carro.modelo.descricao}: #{carro.placa}" itemValue="#{carro}"/>
 	    		</p:selectOneMenu>
+	    		
+	    		<p:outputLabel value="Data Entrega" for="dataEntrega" />
+	    		<p:calendar id="dataEntrega" value="#{novoAluguelBean.aluguel.dataEntrega}" pattern="dd/MM/yyyy HH:mm" stepMinute="10" />
+
+	    		<p:outputLabel value="Data Devolução" for="dataDevolucao" />
+	    		<p:calendar id="dataDevolucao" value="#{novoAluguelBean.aluguel.dataDevolucao}" pattern="dd/MM/yyyy HH:mm" />
 	    		
 	    		<p:outputLabel value="Valor total" for="valorTotal"/>
 	    		<p:inputText id="valorTotal" size="20" maxlength="80" value="#{novoAluguelBean.aluguel.valorTotal}"/>

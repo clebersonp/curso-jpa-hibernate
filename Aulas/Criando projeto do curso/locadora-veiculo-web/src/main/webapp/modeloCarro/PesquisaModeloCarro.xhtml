@@ -18,8 +18,9 @@
 	    		</p:toolbarGroup>
 	    	</p:toolbar>
 	    	
-	    	<p:dataTable id="modelosCarroTable" value="#{pesquisaModeloCarroBean.modelosCarro}" var="modeloCarro"
-		    		style="margin-top: 20px" emptyMessage="Nenhum modelo de carro encontrado." rows="20"
+	    	<p:dataTable id="modelosCarroTable" value="#{pesquisaModeloCarroBean.lazyModeloCarros}" var="modeloCarro"
+		    		style="margin-top: 20px" emptyMessage="Nenhum modelo de carro encontrado." rows="5"
+		    		lazy="true" rowsPerPageTemplate="5,15,25,50,100"
 		    		paginator="true" paginatorAlwaysVisible="false" paginatorPosition="bottom">
 	    		<p:column headerText="Código" style="text-align: center; width: 100px">
 	    			<h:outputText value="#{modeloCarro.codigo}" />
@@ -29,6 +30,9 @@
 	    		</p:column>
 	    		<p:column headerText="Fabricante">
 	    			<h:outputText value="#{modeloCarro.fabricante.nome}" />
+	    		</p:column>
+	    		<p:column headerText="Categoria">
+	    			<h:outputText value="#{modeloCarro.categoria.descricao}" />
 	    		</p:column>
 	    		<p:column style="width: 100px; text-align: center">
 		    		<p:button outcome="CadastroModeloCarro" icon="ui-icon-pencil" title="Editar">

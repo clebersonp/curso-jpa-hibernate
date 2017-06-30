@@ -38,9 +38,16 @@
 	    			<f:selectItems value="#{cadastroModeloCarroBean.fabricantes}" var="fabricante" 
 						itemLabel="#{fabricante.nome}" itemValue="#{fabricante}"/>
 	    		</p:selectOneMenu>
-	    		
+				
 	    		<p:outputLabel value="Modelo" for="modelo"/>
 	    		<p:inputText id="modelo" size="60" maxlength="80" value="#{cadastroModeloCarroBean.modeloCarro.descricao}"/>
+
+				<p:outputLabel value="Categoria" for="idCategoria" />
+				<p:selectOneMenu id="idCategoria" value="#{cadastroModeloCarroBean.modeloCarro.categoria}" >
+					<f:selectItem itemLabel="Selecione a categoria"/>
+					<f:selectItems value="#{cadastroModeloCarroBean.categorias}" var="categoria"
+						itemLabel="#{categoria.descricao}" itemValue="#{categoria}" />
+				</p:selectOneMenu>
 	    	</p:panelGrid>
     	</h:form>
     </ui:define>

@@ -46,6 +46,15 @@ h1 {
 	height: 34px
 }
 
+.ui-growl {
+	position:fixed;
+    top: 40%;
+    left: 37%;
+    width: 360px;
+    height: 110px;
+    z-index:9999;
+}
+
 .ajax-status {
 	position: fixed;
 	top: 55px;
@@ -89,7 +98,7 @@ h1 {
 }
 
 .menu-sistema .ui-menu-parent > a .ui-menuitem-text, .menu-sistema > .ui-menu-list > .ui-menuitem > a > .ui-menuitem-text {
-    color: #ffffff !important;
+    color: #FFFFFF !important;
 }
 
 .menu-sistema .ui-icon-triangle-1-s {
