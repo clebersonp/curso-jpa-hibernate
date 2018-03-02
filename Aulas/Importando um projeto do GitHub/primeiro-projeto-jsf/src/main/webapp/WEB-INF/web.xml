@@ -17,4 +17,8 @@
 		<url-pattern>*.xhtml</url-pattern>
 	</servlet-mapping>
 	
+	<welcome-file-list>
+		<welcome-file>OlaJSF.xhtml</welcome-file>
+	</welcome-file-list>
+	
 </web-app>

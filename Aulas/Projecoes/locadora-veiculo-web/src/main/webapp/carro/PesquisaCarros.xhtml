@@ -51,13 +51,13 @@
 		    			</p:button>
 		    			<p:commandButton icon="ui-icon-trash" title="Excluir" oncomplete="confirmacaoExclusao.show()"
 								process="@this" update=":frmPesquisa:confirmacaoExclusaoDialog">
-							<f:setPropertyActionListener target="#{pesquisaCarroBean.carroSelecionado}" value="#{carro}" />
+							<f:setPropertyActionListener target="#{pesquisaCarroBean.carroSelecionadoParaExcluir}" value="#{carro}" />
 						</p:commandButton>
 		    		</p:column>
 		    </p:dataTable>
 		   
 		    <p:confirmDialog id="confirmacaoExclusaoDialog" widgetVar="confirmacaoExclusao"
-	        		message="Tem certeza que deseja excluir o carro de placa #{pesquisaCarroBean.carroSelecionado.placa}?"  
+	        		message="Tem certeza que deseja excluir o carro de placa #{pesquisaCarroBean.carroSelecionadoParaExcluir.placa}?"  
 	                header="Exclusão de carro" severity="alert">
 	        	<p:button value="Não" onclick="confirmacaoExclusao.hide(); return false;" />
 	        	<p:commandButton value="Sim" update=":frmPesquisa:carrosTable"
